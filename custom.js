@@ -17,7 +17,8 @@ addShortcut(function(){
 //It might be better to only release one key, but check out how only releasing select keys might be problematic:
 addShortcut(function(){
     alert("You pressed the keys 1, 2, and 3.");
-    keyStrokes[key.ONE] = false;
-    keyStrokes[key.TWO] = false;
+	
+    releaseKeys([key.ONE,key.TWO]);
 //   keyStrokes[key.THREE] = false;
 },[key.ONE,key.TWO,key.THREE]);
+//alternatively, usee releaseKey() to release only one key
