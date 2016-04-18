@@ -1,3 +1,10 @@
+/*
+JSKeyCapture Version 1.0
+Written by: Tai Groot, FreLancelot
+Last revision date: 18 April, 2016
+Contact: groot.tai@gmail.com
+*/
+
 var keyStrokes = [];
 window.callDefinedFunction = function(callback,keyCodeValues){
     if(typeof callback !== "function")
