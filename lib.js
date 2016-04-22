@@ -29,6 +29,29 @@ window.addShortcut = function(callback,keyCodeValues){
     window.addEventListener('keydown',funct);
     return funct;
 };
+window.addRemovalShortcut = function(callback,keyCodeValues){
+    if(typeof keyCodeValues === "number")
+        keyCodeValues = [keyCodeValues];
+    var funct = function(cb,val){
+        return function(e){
+            keyStrokes[e.keyCode] = false;
+            callDefinedRemovalFunction(cb,val);
+        };        
+    }(callback,keyCodeValues);
+    window.addEventListener('keyup',funct);
+    return funct;
+};
+window.callDefinedRemovalFunction = function(callback,keyCodeValues){
+    if(typeof callback !== "function")
+        throw new TypeError("Expected callback as first argument");
+    if(typeof keyCodeValues !== "object" && (!Array.isArray || Array.isArray(keyCodeValues)))
+        throw new TypeError("Expected array as second argument");
+    var pressedKeysValid = true;
+    for(var i = 0; i < keyCodeValues.length; ++i)
+        pressedKeysValid = pressedKeysValid && !keyStrokes[keyCodeValues[i]];
+    if(pressedKeysValid)
+        callback();
+};
 window.addEventListener('keyup',function(e){
     keyStrokes[e.keyCode] = false;
 });
